@@ -24,9 +24,12 @@
 							</div>
 						</li>
 					</ul>
+					<!--sec:authorize="hasAuthority('ADMIN')"-->
 					<a class="btn btn-primary" th:href="@{/login}">Ingresar</a>
-					<a class="btn btn-primary" th:href="@{/singUp}">Registrarse</a>
-					<a class="btn btn-primary" href="#">Salir</a>
+					<a class="btn btn-primary" th:href="@{/singup}">Registrarse</a>
+					<div th:if="${session.usuario != null}">
+						<a class="btn btn-primary" th:href="@{/logout}">Salir</a>
+					</div>
 					<form class="d-flex">
 						<input class="form-control me-sm-2" type="text" placeholder="ceviche, ramen...">
 						<button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
