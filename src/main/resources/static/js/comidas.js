@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 var csrfToken = $("[name='_csrf']").attr("value");
 console.log(csrfToken);
+
 function crearComida() {
 
 	if ($('#inputNombre').val() != "" && $('#selectPais').val() != ""

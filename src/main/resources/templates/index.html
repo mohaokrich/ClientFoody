@@ -23,8 +23,10 @@
 <body>
 
 	<header th:insert="fragments/menu :: menu-principal"></header>
-
-<form th:action="@{/comida/crear}" method="POST">
+	
+	<!-- TOKEN CSRF PARA USAR EN FETCH -->
+	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+  
 	<div id="selector" class="main_wrapper">
 		<aside id="menu_izq" class="toggle toggle-content">
 			<h2> Añadir Plato</h2>
@@ -309,7 +311,7 @@
 					<button type="button" id="Anadir" class="btn btn-lg btn-primary">Añadir</button>
 				</div>
 			</div>
-			</form>
+
 		</aside>
 		
 
