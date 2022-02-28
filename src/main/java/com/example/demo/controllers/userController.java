@@ -1,9 +1,8 @@
 package com.example.demo.controllers;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,17 +28,20 @@ public class userController {
 	public String singUp() {
 		return "formRegistro";
 	}
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String getLogOut(HttpSession session) {
-		session.removeAttribute("usuario");
-		session.invalidate();
-		return "redirect:/index";
-	}
-	@RequestMapping(value = "/user/userInfo{id}", method = RequestMethod.GET)
-	public Usuario getUsuario(@PathVariable long id) {
-		return usuarioService.obtenerUsuarioById(id);
-	}
 	
+//	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+//	public String getLogOut(HttpSession session) {
+//		session.removeAttribute("usuario");
+//		session.invalidate();
+//		return "redirect:/index";
+//	}
+	
+	@RequestMapping(value = "/user/userInfo/{id}", method = RequestMethod.GET)
+	public String getUsuario(@PathVariable long id, Model model) {
+		Usuario usuario = usuarioService.obtenerUsuarioById(id);
+        model.addAttribute("usuario", usuario);
+		return "/user/userInfo";
+	}
 	
 	//POST METHODS
 	@PostMapping("/signup")

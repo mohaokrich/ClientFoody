@@ -23,9 +23,6 @@ import javax.persistence.Table;
 @Table(name = "usuario")
 public class Usuario implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -41,6 +38,9 @@ public class Usuario implements Serializable{
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE },mappedBy="usuarios")
 	private Set<Rol> roles = new HashSet<>();
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE },mappedBy="usuarios_comidas")
+	private Set<Comida> comidas = new HashSet<>();
 	
 	//CONSTRUCTORS
 	public Usuario() {

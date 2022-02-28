@@ -14,23 +14,22 @@
 	<title>Examen</title>
 	<author></author>
 	<meta name="author" content="Alumno Alumno">
-	<script th:src="@{/static/js/jquery-3.6.0.min.js}"></script>
+	<script th:src="@{js/jquery-3.6.0.min.js}"></script>
 	<script type="text/javascript" th:src="@{/bootstrap/bootstrap.min.js}"></script>
-	<script th:src="@{/js/javascript_profesor.js}"></script>
+	<script th:src="@{js/javascript_profesor.js}"></script>
+	<meta name="_csrf" content="${_csrf.token}"/>
+	<meta name="_csrf_header" content="${_csrf.headerName}"/>
 </head>
 
 <body>
 
 	<header th:insert="fragments/menu :: menu-principal"></header>
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-
+<form th:action="@{/comida/crear}" method="POST">
 	<div id="selector" class="main_wrapper">
 		<aside id="menu_izq" class="toggle toggle-content">
 			<h2> Añadir Plato</h2>
-			<div class="form-group">
-				<label class="col-form-label" for="inputId">Id del plato</label>
-				<input type="text" class="form-control" placeholder="Id del plato" id="inputId">
-			</div>
 
 			<div class="form-group">
 				<label class="col-form-label" for="inputNombre">Plato</label>
@@ -309,10 +308,12 @@
 
 				<div class="d-grid gap-2">
 
-					<button type="button" class="btn btn-lg btn-primary">Añadir</button>
+					<button type="button" id="Anadir" class="btn btn-lg btn-primary">Añadir</button>
 				</div>
 			</div>
+			</form>
 		</aside>
+		
 
 		<div id="root" class="principal container">
 
@@ -456,6 +457,7 @@
 				</div>
 			</div>
 		</div>
+		<script th:src="@{js/comidas.js}"></script>
 </body>
 
 </html>

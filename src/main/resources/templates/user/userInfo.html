@@ -20,37 +20,27 @@
 	<header th:insert="fragments/menu :: menu-principal"></header>
 
 	<main role="main">
-	
 		<hr>
 		<div class="container">
 
 			<div class="card">
-				<h4 class="card-header"><strong>Formulario de registro</strong></h4>
+				<h4 class="card-header"><strong>USER INFO</strong></h4>
 				<div class="card-body">
-					<form th:action="@{/signup}" th:method="POST">
-						<div class="row">
-							<div class="col-md-3">
-								<div class="form-group">
-									<label for="username">Username</label>
-									<input type="text" class="form-control" id="username" th:name="nombreUsuario"
-										placeholder="Escriba su nombre de usuario" required="required">
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="form-group">
-									<label for="password">Password</label>
-									<input type="password" class="form-control" id="password" th:name="passwdUsuario"
-										placeholder="Escriba su clave de acceso" required="required">
-								</div>
-							</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<h4 th:text=${usuario.idUsuario}></h4>
+							<h4 th:text=${usuario.nombreUsuario}></h4>
+							<h4 th:each="rol: ${usuario.roles}" th:text=${rol.nombreRol}></h4>
 						</div>
-						<hr>
-						<button type="submit" title="Quiero registrarme." class="btn btn-primary">Registrarse</button>
-					</form>
+					</div>
+					<hr>
+					<div class="col-md-3">
+						<div class="form-group">
+						</div>
+					</div>
 				</div>
 			</div>
 		</div> <!-- /container -->
-
 	</main>
 
 

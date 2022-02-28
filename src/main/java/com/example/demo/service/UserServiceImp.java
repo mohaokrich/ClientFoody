@@ -13,8 +13,6 @@ import com.example.demo.entity.Usuario;
 import com.example.demo.repository.RolRepository;
 import com.example.demo.repository.UserRepository;
 
-
-
 @Transactional
 @Service
 public class UserServiceImp implements UserService {
@@ -28,7 +26,7 @@ public class UserServiceImp implements UserService {
 	
 	@Override
 	public Usuario crearUsuario(Usuario u) {
-		Rol rolUser = rolJPA.getById(1L);
+		Rol rolUser = rolJPA.getById(2L);
 		u.addRol(rolUser);
 		u.setPasswdUsuario(bCryptPasswordEncoder.encode(u.getPasswdUsuario()));
 		return usuarioJPA.save(u);

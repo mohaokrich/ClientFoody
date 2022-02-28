@@ -36,12 +36,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	                            "/login",
 	                            "/formLogin",
 	                            "/formRegistro",
+	                            "/comida/crear",
 	                            "/producto/producto{id}",
 	                            "/imagen/{id}",
 	                            "/comida/buscar",
 	                            "/webjars/**").permitAll()
 	                    .antMatchers("/producto/crear").hasAuthority("ADMIN")
 	                    .antMatchers("/producto/borrar/{id}").hasAuthority("ADMIN")
+	                    .antMatchers("/user/userInfo/{id}").hasAnyAuthority("USER" , "ADMIN")
+	                    .antMatchers("/comida/crear").hasAuthority("USER")
+
 	                    .anyRequest().authenticated()
 	                .and()
 	                .formLogin()

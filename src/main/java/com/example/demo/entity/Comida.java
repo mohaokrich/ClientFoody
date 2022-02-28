@@ -2,20 +2,24 @@ package com.example.demo.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "comida")
 public class Comida implements Serializable{
-    /**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +31,14 @@ public class Comida implements Serializable{
     private String hiperenlace;
     private String descripcion;
     private Date fecha;
-
+    
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(name = "usuario_comida", 
+    joinColumns = @JoinColumn(name = "id_comida"), 
+    inverseJoinColumns = @JoinColumn(name = "id_usuario"))
+    private Set<Usuario> usuarios_comidas = new HashSet<>();
+    
+    
     public Comida() {
         super();
 
