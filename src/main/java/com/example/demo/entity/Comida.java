@@ -8,12 +8,14 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -40,7 +42,33 @@ public class Comida implements Serializable{
     private Set<Usuario> usuarios_comidas = new HashSet<>();
     
     
-    public Comida() {
+    
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "comida", orphanRemoval = true)
+    private Set<Comentario> comentarios = new HashSet<>();
+    
+    
+    
+    public Set<Comentario> getComentarios() {
+		return comentarios;
+	}
+
+
+   
+	public void setComentarios(Set<Comentario> comentarios) {
+		this.comentarios = comentarios;
+	}
+
+	
+	public void addComentario(Comentario comentario) {
+		this.comentarios.add(comentario);
+		getComentarios().add(comentario);
+	}
+	public void eliminarComentario(Comentario comentario) {
+		this.comentarios.remove(comentario);
+	}
+	
+
+	public Comida() {
         super();
 
     }

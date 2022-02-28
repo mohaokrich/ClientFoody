@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -40,9 +41,14 @@ public class Usuario implements Serializable{
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE },mappedBy="usuarios")
 	private Set<Rol> roles = new HashSet<>();
+	
 	@JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE },mappedBy="usuarios_comidas")
 	private Set<Comida> comidas = new HashSet<>();
+	
+	//NO SE SABE SI VA
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "usuario", orphanRemoval = true)
+    private Set<Comentario> comentarios = new HashSet<>();
 	
 	//CONSTRUCTORS
 	public Usuario() {
