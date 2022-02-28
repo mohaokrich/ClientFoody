@@ -7,12 +7,11 @@ var csrfToken = $("[name='_csrf']").attr("value");
 console.log(csrfToken);
 function crearComida() {
 
-
 	if ($('#inputNombre').val() != "" && $('#selectPais').val() != ""
 		&& $('#inputEnlace').val() != "" && $('#inputDescripcion').val() != "") {
 			
 		
-		fetch('/comida/crear', {
+		fetch('/crearComida', {
 			headers: {
 				 credentials: 'same-origin',
 				 'Content-type': 'application/json',
@@ -21,7 +20,7 @@ function crearComida() {
 			method: 'POST',
 			body: JSON.stringify({
 				nombre: $('#inputNombre').val(), pais: $('#selectPais').val(),
-				hiperenlace: $('#inputEnlace').val(), descrpcion: $('#inputDescripcion').val()
+				hiperenlace: $('#inputEnlace').val(), descripcion: $('#inputDescripcion').val()
 			})
 		})
 			.then(function(response) {
@@ -32,7 +31,7 @@ function crearComida() {
 				}
 
 			}).then(res => {
-
+				alert(res);
 			});
 	};
 }

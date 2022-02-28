@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
-public interface ComidaService {
+import com.example.demo.entity.Comida;
 
+public interface ComidaService {
+	Comida crearComida(Comida comida);
 }
