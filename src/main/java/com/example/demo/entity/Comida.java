@@ -16,6 +16,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "comida")
 public class Comida implements Serializable{
@@ -30,12 +32,12 @@ public class Comida implements Serializable{
     private String hiperenlace;
     private String descripcion;
     private Date fecha;
-    
-//    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-//    @JoinTable(name = "usuario_comida", 
-//    joinColumns = @JoinColumn(name = "id_comida"), 
-//    inverseJoinColumns = @JoinColumn(name = "id_usuario"))
-//    private Set<Usuario> usuarios_comidas = new HashSet<>();
+    @JsonIgnore
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(name = "usuario_comida", 
+    joinColumns = @JoinColumn(name = "id_comida"), 
+    inverseJoinColumns = @JoinColumn(name = "id_usuario"))
+    private Set<Usuario> usuarios_comidas = new HashSet<>();
     
     
     public Comida() {
@@ -43,7 +45,8 @@ public class Comida implements Serializable{
 
     }
 
-    public Comida(String nombre, String pais, String hiperenlace, String descripcion) {
+
+	public Comida(String nombre, String pais, String hiperenlace, String descripcion) {
 		super();
 		this.nombre = nombre;
 		this.pais = pais;
@@ -51,35 +54,23 @@ public class Comida implements Serializable{
 		this.descripcion = descripcion;
 	}
 
-	public Comida(Long id_comida, String nombre, String pais, String hiperenlace, String descripcion,
-            Date fecha) {
-        super();
-        this.id_comida = id_comida;
-        this.nombre = nombre;
-        this.pais = pais;
-        this.hiperenlace = hiperenlace;
-        this.descripcion = descripcion;
-        this.fecha = fecha;
-    }
+
+    public Set<Usuario> getUsuarios_comidas() {
+		return usuarios_comidas;
+	}
+
+	public void setUsuarios_comidas(Set<Usuario> usuarios_comidas) {
+		this.usuarios_comidas = usuarios_comidas;
+	}
 
 	
-//	
-//    public Set<Usuario> getUsuarios_comidas() {
-//		return usuarios_comidas;
-//	}
-//
-//	public void setUsuarios_comidas(Set<Usuario> usuarios_comidas) {
-//		this.usuarios_comidas = usuarios_comidas;
-//	}
-//
-//	
-//	public void addUsuario(Usuario usuario) {
-//		this.usuarios_comidas.add(usuario);
-//		usuario.getComidas().add(this);
-//	}
-//	public void eliminarComida(Usuario usuario) {
-//		this.usuarios_comidas.remove(usuario);
-//	}
+	public void addUsuario(Usuario usuario) {
+		this.usuarios_comidas.add(usuario);
+		usuario.getComidas().add(this);
+	}
+	public void eliminarComida(Usuario usuario) {
+		this.usuarios_comidas.remove(usuario);
+	}
 	
 	
 	public Long getId_comida() {
@@ -130,5 +121,6 @@ public class Comida implements Serializable{
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
+
 
 }

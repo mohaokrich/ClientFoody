@@ -28,9 +28,6 @@ public class CustomUserDetailsService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String nombre) throws UsernameNotFoundException {
 		Usuario usuario = usuarioJPA.findByNombreUsuario(nombre);
-		
-		Set<Rol> l = usuario.getRoles();
-		HashSet<Rol> roles = new HashSet<>();
 
 		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 		for (Rol rol : usuario.getRoles()) {

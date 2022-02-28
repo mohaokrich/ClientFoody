@@ -19,6 +19,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "usuario")
 public class Usuario implements Serializable{
@@ -38,9 +40,9 @@ public class Usuario implements Serializable{
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE },mappedBy="usuarios")
 	private Set<Rol> roles = new HashSet<>();
-	
-//	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE },mappedBy="usuarios_comidas")
-//	private Set<Comida> comidas = new HashSet<>();
+	@JsonIgnore
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE },mappedBy="usuarios_comidas")
+	private Set<Comida> comidas = new HashSet<>();
 	
 	//CONSTRUCTORS
 	public Usuario() {
@@ -61,23 +63,23 @@ public class Usuario implements Serializable{
 	
 
 
-//	public Set<Comida> getComidas() {
-//		return comidas;
-//	}
-//
-//	public void setComidas(Set<Comida> comidas) {
-//		this.comidas = comidas;
-//	}
+	public Set<Comida> getComidas() {
+		return comidas;
+	}
 
-//	public boolean addComida(Comida comida) {
-//	    comida.addUsuario(this);
-//		return getComidas().add(comida);
-//	}
-//	
-//	public void eliminarComida(Comida comida) {
-//		this.comidas.remove(comida);
-//		comida.getUsuarios_comidas().remove(this);
-//	}
+	public void setComidas(Set<Comida> comidas) {
+		this.comidas = comidas;
+	}
+
+	public boolean addComida(Comida comida) {
+	    comida.addUsuario(this);
+		return getComidas().add(comida);
+	}
+	
+	public void eliminarComida(Comida comida) {
+		this.comidas.remove(comida);
+		comida.getUsuarios_comidas().remove(this);
+	}
 	
 	
 	
