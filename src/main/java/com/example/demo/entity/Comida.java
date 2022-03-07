@@ -34,7 +34,8 @@ public class Comida implements Serializable{
     private String hiperenlace;
     private String descripcion;
     private Date fecha;
-    @JsonIgnore
+    
+	@JsonIgnore
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(name = "usuario_comida", 
     joinColumns = @JoinColumn(name = "id_comida"), 
